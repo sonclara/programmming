@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+        <h1>{{guest.name}}</h1>
+        <hr/>{{guest.email}}
+
+                <p>
+                {{guest.content|linebreaks}}
+                </p><hr/>
+                <p>
+                Created at {{guest.created_at}}
+                <br/> Updated at {{guest.updated_at}}
+
+                </p><hr/>
+
+                <a href="{% url "blog.views.guest_edit" guest.pk %}" class="btn btn-primary">Guest Edit</a>
+
+
+
+<hr/><a href="/guest"> BACK TO GUEST LIST </a>
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>profile</title>
+    </head>
+
+    <body>
+    {{user}}'s profile
+
+    {{% if user.is_authenticated %}}
+    로그아웃
+    {{% else %}}
+    로그인
+    </body>
+
+</html>

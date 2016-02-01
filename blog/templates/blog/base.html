@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=devide-widthm initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>Jihye's Blog</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<style>
+body {
+    padding-top: 60px;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+  background-color: lightyellow;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #6ac9be;
+}
+
+.jumbotron {
+  background-color:  lightgreen;
+}
+
+.navbar{
+  background-color: darkgreen;
+}
+</style>
+</head>
+<body>
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Jihye's Blog</a>
+            <a class="navbar-brand" href="/bio">Bio</a>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+      {{message}}
+    </div>
+  {% endfor %}
+{% endif%}
+
+
+
+<div class="container">
+
+    <div class="jumbotron">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+
+</div>
+
+
+
+<div class="footer">
+    <div class="container">
+        <p class="text-muted"><em>blank of nemo</em></p>
+    </div>
+</div>
+
+
+</body>
+</html>

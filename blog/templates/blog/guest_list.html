@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h2> Guest Book</h2>
+<hr/>
+    <ul>
+    {% for guest in guest_list %}
+        <li>
+            {{guest.id}}
+                <a href = "/guest/{{guest.id}}/"> {{guest.name}}</a>
+            {{guest.created_at}}
+
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
