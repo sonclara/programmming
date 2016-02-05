@@ -65,7 +65,7 @@ def post_new(request):
             '''(commit=False)
             post.author = request.user
             post.save()'''
-            return redirect('blog.views.post_detail', post.pk)
+            return redirect('post_detail', post.pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_form.html', {'form': form,
@@ -80,7 +80,7 @@ def post_edit(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save()
-            return redirect('blog.views.post_detail', post.pk)
+            return redirect('post_detail', post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_form.html', {'form': form,
@@ -93,7 +93,7 @@ def comment_new(request, post_pk):
         if form.is_valid():
             form.save()
             messages.debug(request, '새로운 댓글을 등록했습니다.')
-            return redirect('blog.views.post_detail', post_pk)
+            return redirect('post_detail', post_pk)
     else:
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form':form,
@@ -108,7 +108,7 @@ def comment_edit(request, post_pk, pk):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('blog.views.post_detail', post_pk)
+            return redirect('post_detail', post_pk)
     else:
         form = CommentForm(instance =comment)
     return render(request, 'blog/comment_form.html', {'form':form,
