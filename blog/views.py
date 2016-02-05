@@ -1,9 +1,12 @@
-from django.http import Http404
-from django.shortcuts import redirect, render, get_object_or_404
 from blog.models import Post, Comment, Tag, Category, Guest_book
-from django.views.generic import DetailView
 from blog.forms import PostForm, CommentForm, GuestForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic import DetailView
+from django.utils import timezone
+
 
 
 #render function 3rd attribute==dictionary^
@@ -45,9 +48,6 @@ def tag_detail(request, pk):
     tag = Tag.objects.get(pk=pk)
     return render(request, 'blog/tag_detail.html', {'tag':tag})
 
-
-
-
 '''
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
@@ -55,7 +55,7 @@ def post_detail(request, pk):
 
 post_detail=DetailView.as_view(model=Post)
 
-
+@login_required
 def post_new(request):
 
     if request.method == 'POST':
@@ -71,6 +71,8 @@ def post_new(request):
     return render(request, 'blog/post_form.html', {'form': form,
         })
 
+
+@login_required
 def post_edit(request, pk):
     post = Post.objects.get(pk=pk)
 
@@ -85,12 +87,11 @@ def post_edit(request, pk):
         })
 
 def comment_new(request, post_pk):
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = Post.objects.get(pk=post_pk)
-            comment.save()
+            form.save()
             messages.debug(request, '새로운 댓글을 등록했습니다.')
             return redirect('blog.views.post_detail', post_pk)
     else:

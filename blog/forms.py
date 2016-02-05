@@ -1,6 +1,8 @@
 from django import forms
 from blog.models import Post, Comment, Guest_book
 
+
+
 #ModelForm is much shorter, more convenient
 class PostForm(forms.ModelForm):
     is_agree  =forms.BooleanField(label='약관동의',
